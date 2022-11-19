@@ -59,7 +59,7 @@ module.exports = class com {
     getDevices()
     {
         const registerDevices = utils.ReadJSON(path() + "devices.json")
-        const newRegister = {"devices" : []}
+        let newRegister = {"devices" : []}
         if (this.icue) {
             const deviceCount = icueSkd.CorsairGetDeviceCount()
             for (let di = 0; di < deviceCount; ++di) {
@@ -87,41 +87,15 @@ module.exports = class com {
 
         utils.WriteJSON(path() + "devices.json", newRegister)
         return newRegister
+    }
 
-
-
-
-
-        
-        
-
-        
-        //     let curent = {"name" : "" ,"leds" : [] , "pos" : {"x" : -1, "y" : -1}};
-        //     const deviceInfo = sdk.CorsairGetDeviceInfo(di)
-        //     curent.name = deviceInfo.model
-        //     for (let i = 0; i < registerDevices.devices.length; ++i) {
-        //         if (registerDevices.devices[i].name == curent.name) {
-        //             curent.pos = registerDevices.devices[i].pos
-        //         }
-        //     }
-        //     const ledPositions = sdk.CorsairGetLedPositionsByDeviceIndex(di)
-        //     for (let i = 0; i < ledPositions.length; ++i) {
-        //         curent.leds.push(ledPositions[i].ledId);
-        //     }
-        //     devices.push(curent)
-        // }
-
-        // const razers = [{"name" : "NAGA PRO" ,"leds" : [1800]}]
-
-        // for (let di = 0; di < razers.length; ++di) {
-        //     let curent = {"name" : razers[di].name ,"leds" : razers[di].leds , "pos" : {"x" : -1, "y" : -1}};
-        //     for (let i = 0; i < registerDevices.devices.length; ++i) {
-        //         if (registerDevices.devices[i].name == curent.name) {
-        //             curent.pos = registerDevices.devices[i].pos
-        //         }
-        //     }
-        //     devices.push(curent)
-        // }
+    getAvaibleChromaDevices()
+    {
+        if (this.chroma) {
+            return {"devices" :  razerIds}
+        } else {
+            return null
+        }
     }
 
     postDevice(name)
@@ -133,8 +107,6 @@ module.exports = class com {
             if (registerDevices.devices[i].name == name)
                 return "already exist"
         }
-
-
         
         for (let i = 0; i < razerIds.length; ++i) {
             if (name == razerIds[i].device) {
@@ -150,6 +122,4 @@ module.exports = class com {
         utils.WriteJSON(path() + "devices.json", registerDevices)
         return "true"
     }
-
-
 }

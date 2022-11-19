@@ -1,5 +1,4 @@
 const utils = require("../../utils/index")
-// const setColor = require("../../effects/setColor")
 
 const sdk = require("../../sdk/index")
 
