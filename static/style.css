@@ -1,5 +1,5 @@
 
-  
+/* html { overflow-y: hidden; }  */
 body {
     background-image: url("/back.png");
     background-size: cover;
@@ -9,20 +9,32 @@ body {
 #noPosItem {
     display: flex;
     height: 100px;
-    width: 100%;
+    width: 99%;
     background-color: rgba(221, 221, 221, 0.336);
     border-radius: 15px;
+    position: fixed;
 }
+
+/* #PosItems {
+    position: inherit;
+    height: 100%;
+} */
 
 .box {
   border: 3px solid rgba(255, 255, 255, 0.945);
   background-color: rgba(173, 173, 173, 0.486);
   color: white;
-  border-radius: 2px;
+  border-radius: 50px;
   padding: 10px;
-  position: absolute;
-  cursor: grab;
+  cursor: pointer;
+  width : 40px
 }
+
+.boxLogo {
+    width: 100%;
+    object-fit: cover;
+}
+
 
 .box:active {
     cursor: grabbing;
@@ -30,15 +42,36 @@ body {
     cursor: -moz-grabbing;
 }
 
-.saveButton {
+.boxMainDiv {
     position: absolute;
-    top: 94%;
+    display: block;
+}
+
+.fold {
+    position: fixed;
+    display: block;
+}
+
+.itemContextMenu {
+    background-color: rgba(58, 58, 58, 0.753);
+    border-radius: 8px;
+    height: auto;
+    padding : 1px;
+    color : white;
+
+
+}
+
+.saveButton {
+    position: fixed;
+    top: 1%;
     left: 94%;
     width: 5%;
     height: 5%;
     background-color: rgba(173, 173, 173, 0.884);
     border-radius: 10%;
     font-size: 150%;
+    z-index: 10;
 }
 
 .saveButton:hover {
@@ -46,4 +79,36 @@ body {
     cursor : pointer;
 }
 
+#ItemInfoMenu {
+    background-image: url("/assets/infoMenuBack.jpg");
+    background-size: contain;
+    background-attachment: fixed;
+    height: 20%;
+    width: 99%;
+    position: fixed;
+    top : 80%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border: solid;
+    border-width: 3px;
+    border-color: rgb(161, 161, 161);    
+}
 
+.closeButton {
+    position: relative;
+    float: right;
+    right : 1vw;
+    top : 1vw;
+    width: 1vw;
+    height: 1vw;
+    background-color: rgba(255, 88, 88, 0.438);
+    border-radius: 1vw;
+}
+
+.closeButton:hover {
+    background-color: rgba(255, 62, 62, 0.603);
+}
+
+.closeButton:active {
+    background-color: rgba(255, 170, 170, 0.603);
+}

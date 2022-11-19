@@ -65,7 +65,7 @@ module.exports = class com {
             for (let di = 0; di < deviceCount; ++di) {
                 const ledPositions = icueSkd.CorsairGetLedPositionsByDeviceIndex(di)
                 const deviceInfo = icueSkd.CorsairGetDeviceInfo(di)
-                let curent = {"name" : deviceInfo.model ,"leds" : ledPositions , "pos" : {"x" : -1, "y" : -1}};
+                let curent = {"name" : deviceInfo.model ,"leds" : ledPositions , "pos" : {"x" : -1, "y" : -1}, "type" : "corsair"};
                 
                 for (let i = 0; i < registerDevices.devices.length; ++i) {
                     if (deviceInfo.model == registerDevices.devices[i].name)
@@ -112,7 +112,7 @@ module.exports = class com {
             if (name == razerIds[i].device) {
                 if (!this.chroma)
                     return "razer synapse not started"
-                registerDevices.devices.push({"name" : name, "leds" : razerIds[i].leds, "pos":{"x":-1,"y":-1}})
+                registerDevices.devices.push({"name" : name, "leds" : razerIds[i].leds, "pos":{"x":-1,"y":-1}, "type" : "razer"})
                 find = true
                 break
             }

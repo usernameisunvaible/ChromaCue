@@ -6,9 +6,12 @@
         <link rel="stylesheet" type="text/css" href="/style.css">
     </head>
     <body onload="loadPage()">
-       
-            <div id="noPosItem"></div>
-
-            <button class="saveButton" type="button" onclick="save()">save</button>
+        <button class="saveButton" type="button" onclick="save()">save</button>
+        <div id="noPosItem"></div>
+        <div id="PosItems"></div>
+        
+        <div id="ItemInfoMenu" style="display: none;">
+            <button class="closeButton" type="button" onclick="document.getElementById('ItemInfoMenu').style.display = 'none'"></button>
+        </div>
     </body>
 </html>
