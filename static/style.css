@@ -1,0 +1,49 @@
+
+  
+body {
+    background-image: url("/back.png");
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+#noPosItem {
+    display: flex;
+    height: 100px;
+    width: 100%;
+    background-color: rgba(221, 221, 221, 0.336);
+    border-radius: 15px;
+}
+
+.box {
+  border: 3px solid rgba(255, 255, 255, 0.945);
+  background-color: rgba(173, 173, 173, 0.486);
+  color: white;
+  border-radius: 2px;
+  padding: 10px;
+  position: absolute;
+  cursor: grab;
+}
+
+.box:active {
+    cursor: grabbing;
+    cursor: -webkit-grabbing;
+    cursor: -moz-grabbing;
+}
+
+.saveButton {
+    position: absolute;
+    top: 94%;
+    left: 94%;
+    width: 5%;
+    height: 5%;
+    background-color: rgba(173, 173, 173, 0.884);
+    border-radius: 10%;
+    font-size: 150%;
+}
+
+.saveButton:hover {
+    background-color: rgba(230, 230, 230, 0.884);
+    cursor : pointer;
+}
+
+
