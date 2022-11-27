@@ -1,9 +1,22 @@
 
 let devices;
-const blocSize = 1920 / 2000
+const blocSize = 1920 / 2000;
 
 
 
+
+function rgbToHex(rgb) {
+    return "#" + (1 << 24 | rgb.r << 16 | rgb.g << 8 | rgb.b).toString(16).slice(1);
+}
+
+function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : null;
+}
 
 function createItemBox(name, type)
 {
@@ -75,15 +88,103 @@ function mouseup(e)
     }
 }
 
+function colorComp(device)
+{
+    let first = null;
+    try {
+        for (let i = 0; i < device.leds.length; ++i) {
+            if (i == 0)
+                first = device.leds[i].color
+            else {
+                if (device.leds[i].color.r != first.r || device.leds[i].color.g != first.g || device.leds[i].color.b != first.b)
+                    return null
+            }
+        }
+    } catch {
+        first = null
+    }
+    return first;
+}
+
+function createLed(led, ledName)
+{
+    try {
+        let mainDiv = document.createElement("div")
+        let text = document.createElement("p")
+        let input = document.createElement("input")
+        let inputParent = document.createElement("div")
+
+        mainDiv.setAttribute("style" , "display: flex; align-items: center; margin-bottom: 0.2vw;")
+        text.setAttribute("class", "infoMenuLedsText")
+        text.textContent = ledName
+        input.setAttribute("type", "color")
+        inputParent.setAttribute("class", "colorPickerParent")
+        inputParent.style.backgroundColor = rgbToHex(led.color)
+        input.setAttribute("class" , "colorPicker")
+        input.setAttribute("onChange", "setLedStaticColor([" + led.ledId + "], this)")
+        input.setAttribute("value", rgbToHex(led.color))
+        mainDiv.append(text)
+        inputParent.append(input)
+        mainDiv.append(inputParent)
+
+        document.getElementById("allMyLeds").append(mainDiv)
+    } catch {}
+
+}
+
 function dbClick(e)
 {
+    let device = findDeviceByName(this.children[1].getAttribute("name"))
+    let globalColor = colorComp(device)
+
+    document.getElementById("allMyLeds").textContent = ""
+    document.getElementById("ItemInfoMenu").setAttribute("name", device.name)
+    document.getElementById("infoMenuImg").children[0].setAttribute("src", "assets/" + device.name + ".png")
+    document.getElementById("infoMenuEffectButtons").setAttribute("name", device.name)
+    
+    if (globalColor!= null) {
+        document.getElementById("globalStaticColorPicker").value = rgbToHex(globalColor)
+        document.getElementById("globalStaticColorPickerParent").style.backgroundColor = rgbToHex(globalColor)
+    }else {
+        document.getElementById("globalStaticColorPicker").value = "#000000"
+        document.getElementById("globalStaticColorPickerParent").style.backgroundColor = "#000000"
+    }
+
+    for (let i = 0; i < device.leds.length; ++i) {
+        createLed(device.leds[i], "led n°" + (i + 1).toString() + ": " )
+    }
     document.getElementById("ItemInfoMenu").style.display = "block"
 }
 
+function toggleCheckbox(ch)
+{
+    if(ch.getAttribute("value") == "0" ||ch.getAttribute("value") == null) {
+        ch.setAttribute("value", "1")
+        ch.children[0].style.opacity = 1
+        ch.classList.add("checked")
+        ch.classList.remove("unchecked")
+    } else {
+        ch.setAttribute("value", "0")
+        ch.classList.add("unchecked")
+        ch.classList.remove("checked")
+        ch.children[0].style.opacity = 0
+    }  
+}
+
+
+function checkTheBox(e)
+{
+    toggleCheckbox(this)
+}
 
 
 function loadPage()
 {
+    let boxs = document.querySelectorAll('.checkbox');
+    boxs.forEach(function(boxs) {
+        boxs.addEventListener("click", checkTheBox, false)
+    })
+
     $.ajax({url: "/devices", success: function(result){
         devices = result.data
         let noPos = []
@@ -137,9 +238,59 @@ function save()
       });
 }
 
+function findDeviceByName(name)
+{
+    for (let i = 0; i < devices.length; ++i) {
+        if (devices[i].name == name)
+            return devices[i]
+    }
+    return null
+}
+
+function setLedsColor(leds, color, callback)
+{
+    $.ajax({
+        type: "PUT",
+        url: "/leds",
+        data: JSON.stringify ({"color" : color, "leds" : leds}),
+        contentType: "application/json; charset=utf-8",
+        dataType :"json",
+        success: function(result) {
+            console.log(result)
+            if (callback)
+                callback(result)
+        },
+      });
+}
+
+function UpdateStaticGlobalColor(item, inItem)
+{
+    let device = findDeviceByName(item)
+    console.log(device)
+    let leds = []
+    let color = inItem.value
     
-    
-    
-    
-// 2000 | 1920
-// pos    | x
+    inItem.parentNode.style.backgroundColor = color
+    for (let i = 0; i < device.leds.length; ++i)
+        leds.push(device.leds[i].ledId)
+    let ledsInput = document.getElementById("allMyLeds").children
+
+    for (let i = 0; i < ledsInput.length; ++i) {
+        console.log(ledsInput[i].children[1])
+        ledsInput[i].children[1].style.backgroundColor = color
+        ledsInput[i].children[1].children[0].value = color
+    }
+    setLedsColor(leds, hexToRgb(color))
+}
+
+
+// function effectPage(effect)
+// {
+//     document.getElementById()
+// }
+
+function setLedStaticColor(led, inItem)
+{
+    inItem.parentNode.style.backgroundColor = inItem.value
+    setLedsColor(led, hexToRgb(inItem.value))
+}
