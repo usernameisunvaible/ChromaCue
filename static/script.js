@@ -18,13 +18,14 @@ function hexToRgb(hex) {
     } : null;
 }
 
-function createItemBox(name, type)
+function createItemBox(name, type, id)
 {
     let fullDiv = document.createElement("div")
     fullDiv.setAttribute("class", "boxMainDiv")
     let itemDiv = document.createElement("div")
     itemDiv.setAttribute('name', name)
     itemDiv.setAttribute("class", "box")
+    itemDiv.setAttribute("appId" , id)
     let Img = document.createElement("img")
     Img.setAttribute("class", "boxLogo")
     Img.setAttribute("src", "/assets/" + type + ".png")
@@ -40,9 +41,9 @@ function createItemBox(name, type)
     fullDiv.append(itemDiv)
     return fullDiv
 }
-function addPosItem(name, pos, type)
+function addPosItem(name, pos, type, id)
 {
-    let out = createItemBox(name, type)
+    let out = createItemBox(name, type, id)
     out.style.left = pos.x * blocSize
     out.style.top = pos.y * blocSize + 110
     out.setAttribute("hover" , "false")
@@ -53,7 +54,7 @@ function addPosItem(name, pos, type)
 function appendNoPosItems(Items)
 {
     for (let i = 0; i < Items.length; ++i) {
-        let out = createItemBox(Items[i].name, Items[i].type)
+        let out = createItemBox(Items[i].name, Items[i].type, Items[i].id)
         out.style.left = i * 70 + 10
         out.style.top = 25
         out.setAttribute("hover" , "false")
@@ -106,7 +107,7 @@ function colorComp(device)
     return first;
 }
 
-function createLed(led, ledName)
+function createLed(led, ledName, CueIndex, id)
 {
     try {
         let mainDiv = document.createElement("div")
@@ -121,7 +122,7 @@ function createLed(led, ledName)
         inputParent.setAttribute("class", "colorPickerParent")
         inputParent.style.backgroundColor = rgbToHex(led.color)
         input.setAttribute("class" , "colorPicker")
-        input.setAttribute("onChange", "setLedStaticColor([" + led.ledId + "], this)")
+        input.setAttribute("onChange", "setLedStaticColor([{ 'ledId' : ["+ led.ledId + "], 'cueIndex' : " + CueIndex +", 'id' : " + id +"}], this)")
         input.setAttribute("value", rgbToHex(led.color))
         mainDiv.append(text)
         inputParent.append(input)
@@ -129,19 +130,18 @@ function createLed(led, ledName)
 
         document.getElementById("allMyLeds").append(mainDiv)
     } catch {}
-
 }
 
 function dbClick(e)
 {
-    let device = findDeviceByName(this.children[1].getAttribute("name"))
+    let device = findDeviceById(this.children[1].getAttribute("appid"))
     let globalColor = colorComp(device)
 
     document.getElementById("allMyLeds").textContent = ""
     document.getElementById("ItemInfoMenu").setAttribute("name", device.name)
+    document.getElementById("ItemInfoMenu").setAttribute("appid", device.id)
     document.getElementById("infoMenuImg").children[0].setAttribute("src", "assets/" + device.name + ".png")
     document.getElementById("infoMenuEffectButtons").setAttribute("name", device.name)
-    
     if (globalColor!= null) {
         document.getElementById("globalStaticColorPicker").value = rgbToHex(globalColor)
         document.getElementById("globalStaticColorPickerParent").style.backgroundColor = rgbToHex(globalColor)
@@ -151,7 +151,7 @@ function dbClick(e)
     }
 
     for (let i = 0; i < device.leds.length; ++i) {
-        createLed(device.leds[i], "led n°" + (i + 1).toString() + ": " )
+        createLed(device.leds[i], "led n°" + (i + 1).toString() + ": " , device.cueIndex)
     }
     document.getElementById("ItemInfoMenu").style.display = "block"
 }
@@ -171,12 +171,10 @@ function toggleCheckbox(ch)
     }  
 }
 
-
 function checkTheBox(e)
 {
     toggleCheckbox(this)
 }
-
 
 function loadPage()
 {
@@ -193,7 +191,7 @@ function loadPage()
             if (result.data[i].pos.x == -1)
                 noPos.push (result.data[i])
             else
-                addPosItem(result.data[i].name, result.data[i].pos, result.data[i].type)
+                addPosItem(result.data[i].name, result.data[i].pos, result.data[i].type, result.data[i].id)
         }
         appendNoPosItems(noPos)
         $(".boxMainDiv").draggable();
@@ -219,9 +217,9 @@ function save()
         let itemPos = [item.getBoundingClientRect().left, item.getBoundingClientRect().top - 110]
         let data = null
         if (itemPos[1] >= 0)
-            data = {"name" : item.getAttribute("name"), "pos" : {"x" : parseInt(itemPos[0] * 2000 / 1920) , "y" : parseInt(itemPos[1] * 2000 / 1920)}}
+            data = {"id" : item.getAttribute("appid"), "pos" : {"x" : parseInt(itemPos[0] * 2000 / 1920) , "y" : parseInt(itemPos[1] * 2000 / 1920)}}
         else
-            data = {"name" : item.getAttribute("name"), "pos" : {"x" : -1 , "y" : -1}}
+            data = {"id" : item.getAttribute("appid"), "pos" : {"x" : -1 , "y" : -1}}
 
         out.data.push(data)
     })
@@ -238,25 +236,24 @@ function save()
       });
 }
 
-function findDeviceByName(name)
+function findDeviceById(id)
 {
     for (let i = 0; i < devices.length; ++i) {
-        if (devices[i].name == name)
+        if (devices[i].id == id)
             return devices[i]
     }
     return null
 }
 
-function setLedsColor(leds, color, callback)
+function setLedsColor(devices, color, callback)
 {
     $.ajax({
         type: "PUT",
         url: "/leds",
-        data: JSON.stringify ({"color" : color, "leds" : leds}),
+        data: JSON.stringify ({"color" : color, "devices" : devices}),
         contentType: "application/json; charset=utf-8",
         dataType :"json",
         success: function(result) {
-            console.log(result)
             if (callback)
                 callback(result)
         },
@@ -265,29 +262,21 @@ function setLedsColor(leds, color, callback)
 
 function UpdateStaticGlobalColor(item, inItem)
 {
-    let device = findDeviceByName(item)
-    console.log(device)
-    let leds = []
+    let device = findDeviceById(item)
+    let devicesOut = [{"ledId" : [], "cueIndex" : device.cueIndex, "id" : device.id}]
     let color = inItem.value
     
     inItem.parentNode.style.backgroundColor = color
     for (let i = 0; i < device.leds.length; ++i)
-        leds.push(device.leds[i].ledId)
+        devicesOut[0].ledId.push(device.leds[i].ledId)
     let ledsInput = document.getElementById("allMyLeds").children
 
     for (let i = 0; i < ledsInput.length; ++i) {
-        console.log(ledsInput[i].children[1])
         ledsInput[i].children[1].style.backgroundColor = color
         ledsInput[i].children[1].children[0].value = color
     }
-    setLedsColor(leds, hexToRgb(color))
+    setLedsColor(devicesOut, hexToRgb(color))
 }
-
-
-// function effectPage(effect)
-// {
-//     document.getElementById()
-// }
 
 function setLedStaticColor(led, inItem)
 {

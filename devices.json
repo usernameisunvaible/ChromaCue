@@ -1,161 +1,141 @@
 {
 	"devices": [
 		{
-			"name": "ST100RGB",
-			"effect": "static",
-			"leds": [
-				{
-					"ledId": 194,
-					"top": 60,
-					"left": 100,
-					"height": 40,
-					"width": 40,
-					"color": {
-						"r": 3,
-						"g": 217,
-						"b": 66
-					}
-				},
-				{
-					"ledId": 195,
-					"top": 100,
-					"left": 100,
-					"height": 40,
-					"width": 40,
-					"color": {
-						"r": 3,
-						"g": 217,
-						"b": 66
-					}
-				},
-				{
-					"ledId": 192,
-					"top": 20,
-					"left": 60,
-					"height": 40,
-					"width": 40,
-					"color": {
-						"r": 3,
-						"g": 217,
-						"b": 66
-					}
-				},
-				{
-					"ledId": 198,
-					"top": 60,
-					"left": 20,
-					"height": 40,
-					"width": 40,
-					"color": {
-						"r": 141,
-						"g": 1,
-						"b": 233
-					}
-				},
-				{
-					"ledId": 193,
-					"top": 20,
-					"left": 100,
-					"height": 40,
-					"width": 40,
-					"color": {
-						"r": 3,
-						"g": 217,
-						"b": 66
-					}
-				},
-				{
-					"ledId": 199,
-					"top": 0,
-					"left": 0,
-					"height": 40,
-					"width": 40,
-					"color": {
-						"r": 3,
-						"g": 217,
-						"b": 66
-					}
-				},
-				{
-					"ledId": 191,
-					"top": 20,
-					"left": 60,
-					"height": 40,
-					"width": 40,
-					"color": {
-						"r": 3,
-						"g": 217,
-						"b": 66
-					}
-				},
-				{
-					"ledId": 196,
-					"top": 100,
-					"left": 60,
-					"height": 40,
-					"width": 40,
-					"color": {
-						"r": 3,
-						"g": 217,
-						"b": 66
-					}
-				},
-				{
-					"ledId": 197,
-					"top": 100,
-					"left": 20,
-					"height": 40,
-					"width": 40,
-					"color": {
-						"r": 3,
-						"g": 217,
-						"b": 66
-					}
-				}
-			],
-			"pos": {
-				"x": -1,
-				"y": -1
-			},
-			"type": "corsair"
-		},
-		{
 			"name": "K55 RGB",
-			"effect": "static",
 			"leds": [
 				{
 					"ledId": 502,
 					"top": 18,
 					"left": 173,
-					"height": 13,
-					"width": 13,
 					"color": {
-						"r": 255,
-						"g": 234,
-						"b": 0
-					}
-				},
-				{
-					"ledId": 500,
-					"top": 18,
-					"left": 5,
-					"height": 13,
-					"width": 13,
-					"color": {
-						"r": 255,
-						"g": 234,
-						"b": 0
+						"r": 174,
+						"g": 0,
+						"b": 255
 					}
 				},
 				{
 					"ledId": 501,
 					"top": 18,
 					"left": 74,
-					"height": 13,
-					"width": 13,
+					"color": {
+						"r": 174,
+						"g": 0,
+						"b": 255
+					}
+				},
+				{
+					"ledId": 500,
+					"top": 18,
+					"left": 5,
+					"color": {
+						"r": 174,
+						"g": 0,
+						"b": 255
+					}
+				}
+			],
+			"pos": {
+				"x": 546,
+				"y": 309
+			},
+			"effect": "static",
+			"type": "corsair",
+			"id": "2781da5a85840d024d2c7e7c70b1a0b7",
+			"cueIndex": 0
+		},
+		{
+			"name": "VOID PRO Wireless",
+			"leds": [
+				{
+					"ledId": 153,
+					"top": 0,
+					"left": 0,
 					"color": {
 						"r": 255,
-						"g": 234,
+						"g": 0,
+						"b": 0
+					}
+				},
+				{
+					"ledId": 152,
+					"top": 0,
+					"left": 0,
+					"color": {
+						"r": 255,
+						"g": 0,
+						"b": 0
+					}
+				}
+			],
+			"pos": {
+				"x": 312,
+				"y": 552
+			},
+			"effect": "static",
+			"type": "corsair",
+			"id": "32249dfe024591478ce4fdcb7840d038",
+			"cueIndex": 1
+		},
+		{
+			"name": "VENGEANCE RGB RS",
+			"leds": [
+				{
+					"ledId": 600,
+					"top": 4,
+					"left": 108,
+					"color": {
+						"r": 255,
+						"g": 247,
+						"b": 0
+					}
+				},
+				{
+					"ledId": 601,
+					"top": 29,
+					"left": 108,
+					"color": {
+						"r": 255,
+						"g": 247,
+						"b": 0
+					}
+				},
+				{
+					"ledId": 602,
+					"top": 55,
+					"left": 108,
+					"color": {
+						"r": 255,
+						"g": 247,
+						"b": 0
+					}
+				},
+				{
+					"ledId": 603,
+					"top": 80,
+					"left": 108,
+					"color": {
+						"r": 255,
+						"g": 247,
+						"b": 0
+					}
+				},
+				{
+					"ledId": 604,
+					"top": 106,
+					"left": 108,
+					"color": {
+						"r": 255,
+						"g": 247,
+						"b": 0
+					}
+				},
+				{
+					"ledId": 605,
+					"top": 132,
+					"left": 108,
+					"color": {
+						"r": 255,
+						"g": 247,
 						"b": 0
 					}
 				}
@@ -164,55 +144,198 @@
 				"x": -1,
 				"y": -1
 			},
-			"type": "corsair"
+			"effect": "static",
+			"type": "corsair",
+			"id": "3087ccb7b877e1d11a3d30af0133093a",
+			"cueIndex": 2
 		},
 		{
-			"name": "VOID PRO Wireless",
-			"effect": "static",
+			"name": "VENGEANCE RGB RS",
 			"leds": [
 				{
-					"ledId": 153,
-					"top": 0,
-					"left": 0,
-					"height": 13,
-					"width": 13,
+					"ledId": 600,
+					"top": 4,
+					"left": 124,
 					"color": {
-						"r": 135,
-						"g": 135,
-						"b": 135
+						"r": 0,
+						"g": 17,
+						"b": 255
 					}
 				},
 				{
-					"ledId": 152,
-					"top": 0,
-					"left": 0,
-					"height": 13,
-					"width": 13,
+					"ledId": 601,
+					"top": 29,
+					"left": 124,
 					"color": {
-						"r": 143,
-						"g": 0,
-						"b": 0
+						"r": 0,
+						"g": 17,
+						"b": 255
+					}
+				},
+				{
+					"ledId": 602,
+					"top": 55,
+					"left": 124,
+					"color": {
+						"r": 0,
+						"g": 17,
+						"b": 255
+					}
+				},
+				{
+					"ledId": 603,
+					"top": 80,
+					"left": 124,
+					"color": {
+						"r": 0,
+						"g": 17,
+						"b": 255
+					}
+				},
+				{
+					"ledId": 604,
+					"top": 106,
+					"left": 124,
+					"color": {
+						"r": 0,
+						"g": 17,
+						"b": 255
+					}
+				},
+				{
+					"ledId": 605,
+					"top": 132,
+					"left": 124,
+					"color": {
+						"r": 0,
+						"g": 17,
+						"b": 255
 					}
 				}
 			],
 			"pos": {
-				"x": 486,
-				"y": 221
+				"x": 669,
+				"y": 615
 			},
-			"type": "corsair"
+			"effect": "static",
+			"type": "corsair",
+			"id": "4440346e65709488c84ea5c7005b68b1",
+			"cueIndex": 3
+		},
+		{
+			"name": "ST100RGB",
+			"leds": [
+				{
+					"ledId": 197,
+					"top": 100,
+					"left": 20,
+					"color": {
+						"r": 0,
+						"g": 255,
+						"b": 64
+					}
+				},
+				{
+					"ledId": 196,
+					"top": 100,
+					"left": 60,
+					"color": {
+						"r": 0,
+						"g": 255,
+						"b": 64
+					}
+				},
+				{
+					"ledId": 195,
+					"top": 100,
+					"left": 100,
+					"color": {
+						"r": 0,
+						"g": 255,
+						"b": 64
+					}
+				},
+				{
+					"ledId": 194,
+					"top": 60,
+					"left": 100,
+					"color": {
+						"r": 0,
+						"g": 255,
+						"b": 64
+					}
+				},
+				{
+					"ledId": 193,
+					"top": 20,
+					"left": 100,
+					"color": {
+						"r": 0,
+						"g": 255,
+						"b": 64
+					}
+				},
+				{
+					"ledId": 192,
+					"top": 20,
+					"left": 60,
+					"color": {
+						"r": 0,
+						"g": 255,
+						"b": 64
+					}
+				},
+				{
+					"ledId": 191,
+					"top": 20,
+					"left": 60,
+					"color": {
+						"r": 0,
+						"g": 255,
+						"b": 64
+					}
+				},
+				{
+					"ledId": 199,
+					"top": 0,
+					"left": 0,
+					"color": {
+						"r": 0,
+						"g": 255,
+						"b": 64
+					}
+				},
+				{
+					"ledId": 198,
+					"top": 60,
+					"left": 20,
+					"color": {
+						"r": 0,
+						"g": 255,
+						"b": 64
+					}
+				}
+			],
+			"pos": {
+				"x": -1,
+				"y": -1
+			},
+			"effect": "static",
+			"type": "corsair",
+			"id": "9da420494e6c9509990e48a18f95c316",
+			"cueIndex": 4
 		},
 		{
 			"name": "MM700 RGB",
-			"effect": "static",
 			"leds": [
 				{
-					"ledId": 169,
-					"top": 0,
-					"left": 250,
+					"ledId": 167,
+					"top": 114,
+					"left": 0,
 					"color": {
-						"r": 20,
-						"g": 151,
-						"b": 166
+						"r": 153,
+						"g": 255,
+						"b": 0
 					}
 				},
 				{
@@ -220,48 +343,52 @@
 					"top": 57,
 					"left": 125,
 					"color": {
-						"r": 1,
-						"g": 0,
-						"b": 1
+						"r": 153,
+						"g": 255,
+						"b": 0
 					}
 				},
 				{
-					"ledId": 167,
-					"top": 114,
-					"left": 0,
+					"ledId": 169,
+					"top": 0,
+					"left": 250,
 					"color": {
-						"r": 93,
-						"g": 153,
-						"b": 56
+						"r": 153,
+						"g": 255,
+						"b": 0
 					}
 				}
 			],
 			"pos": {
-				"x": 870,
-				"y": 391
+				"x": -1,
+				"y": -1
 			},
-			"type": "corsair"
+			"effect": "static",
+			"type": "corsair",
+			"id": "63f9fdcaa000f804493992333d2a7fba",
+			"cueIndex": 5
 		},
 		{
 			"name": "RAZER MOUSE",
-			"effect": "static",
 			"leds": [
 				{
 					"ledId": 1800,
 					"top": 50,
 					"left": 40,
 					"color": {
-						"r": 163,
+						"r": 245,
 						"g": 0,
-						"b": 44
+						"b": 0
 					}
 				}
 			],
+			"effect": "static",
 			"pos": {
-				"x": 312,
-				"y": 334
+				"x": -1,
+				"y": -1
 			},
-			"type": "razer"
+			"type": "razer",
+			"id": "a007dccc97bc274150a4375706c4145f"
 		}
 	]
 }

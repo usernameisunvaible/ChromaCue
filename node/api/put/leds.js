@@ -6,11 +6,11 @@ const leds = (req, res) => {
     try {
         const request = req.body
 
-        if (!request.leds || !request.color) {
+        if (!request.devices || !request.color) {
             res.status(400)
             res.json({"msg": "bad request"})
         } else {
-            sdk.com.setColor(request.color, request.leds)
+            sdk.com.setColor(request.color, request.devices)
             res.status(200)
             res.send({"msg" : "color applied"})
         }

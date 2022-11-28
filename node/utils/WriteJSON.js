@@ -1,5 +1,4 @@
 const fsp = require('fs/promises');
-const beautify = require("json-beautify");
 
 //Write json in a file
 const WriteJSON = (path, data) => {
