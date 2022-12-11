@@ -1,5 +1,5 @@
 const com = require("./communication")
-const effect = require("./")
+const syncEffect = require("./syncEffects")
 
 module.exports = {
     com : new com()

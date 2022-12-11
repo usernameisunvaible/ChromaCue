@@ -3,7 +3,8 @@ const Chroma = require("../razerSdk/index")
 const razerIds = require("../../razerIds");
 const utils = require("../utils/index")
 const path = require("../../absPath.js");
-const { sync } = require('mkdirp');
+const self = require("./index")
+const syncEffect = require("./syncEffects")
 
 module.exports = class com {
     init(callback)
@@ -16,10 +17,15 @@ module.exports = class com {
                 this.icue = false
             else 
                 this.icue = true
+            
 
             this.reloadColors()
             
-            
+            const syncEff = utils.ReadJSON(path() + "devices.json").syncEffect
+            this.syncEffect = new syncEffect()
+            this.syncEffect.init(this.getDevices(false).devices, syncEff)
+
+
             if (callback)
                 callback()
         })
@@ -44,21 +50,24 @@ module.exports = class com {
             icueSkd.CorsairSetLedsColorsFlushBuffer()
         }
 
-        // if (this.chroma) {
-        //     for (let i = 0; i < registerDevices.devices.length; ++i) {
-        //         if (registerDevices.devices[i].type == "razer") {
-        //             for (let j = 0; j < razerIds.length; ++j) {
-        //                 for (let k = 0; k < razerIds[j].leds.length; ++k) {
-        //                     for (let l = 0; l < registerDevices.devices[i].leds.length; ++l) {
-        //                         if (registerDevices.devices[i].leds[l].ledId == razerIds[j].leds[k].ledId) {
-        //                             razerIds[j].select.setColor(Chroma.colors.rgb(razerIds[j].leds[k].color.r, razerIds[j].leds[k].color.g, razerIds[j].leds[k].color.b))
-        //                         }
-        //                     }
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
+        if (this.chroma) {
+            setTimeout(() => {
+                for (let i = 0; i < registerDevices.devices.length; ++i) {
+                    if (registerDevices.devices[i].type == "razer" && registerDevices.devices[i].effect == "static") {
+                        for (let j = 0; j < razerIds.length; ++j) {
+                            for (let k = 0; k < razerIds[j].leds.length; ++k) {
+                                for (let l = 0; l < registerDevices.devices[i].leds.length; ++l) {
+                                    if (registerDevices.devices[i].leds[l].ledId == razerIds[j].leds[k].ledId) {
+                                        console.log(registerDevices.devices[i].leds[l].color.r, registerDevices.devices[i].leds[l].color.g, registerDevices.devices[i].leds[l].color.b)
+                                        razerIds[j].select.setColor(Chroma.colors.rgb(registerDevices.devices[i].leds[l].color.r, registerDevices.devices[i].leds[l].color.g, registerDevices.devices[i].leds[l].color.b))
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }, 1500)
+        }        
     }
 
 
@@ -72,9 +81,13 @@ module.exports = class com {
         for (let i  = 0; i < devices.length; ++i) {
             for (let k = 0; k < devices[i].ledId.length; ++k) {
                 if (devices[i].ledId[k] >= 1800 && this.chroma) {
+                    
                     for (let j = 0; j < razerIds.length; ++j) {
-                        if (devices[i].ledId[k] == razerIds[j].id)
-                            razerIds[j].select.setColor(Chroma.colors.rgb(color.r, color.g, color.b))
+                        for (let e = 0; e < razerIds[j].leds.length; ++e) {
+                            if (devices[i].ledId[k] == razerIds[j].leds[e].ledId) {
+                                razerIds[j].select.setColor(Chroma.colors.rgb(color.r, color.g, color.b))
+                            }
+                        }
                     }
                 } else {
                     icueSkd.CorsairSetLedsColorsBufferByDeviceIndex(devices[i].cueIndex,  [{ledId : devices[i].ledId[k], r : color.r, g : color.g, b : color.b}])
@@ -114,16 +127,11 @@ module.exports = class com {
         return true
     }
 
-    getDevices()
+    getDevices(rewrite = true)
     {
-        const registerDevices = utils.ReadJSON(path() + "devices.json")
-
-
-        // return registerDevices
-
+        let registerDevices = utils.ReadJSON(path() + "devices.json")
 
         let outRegister = {"devices" : []}
-        let reWrite = false
         if (this.icue) {
             const deviceCount = icueSkd.CorsairGetDeviceCount()
             for (let di = 0; di < deviceCount; ++di) {
@@ -132,7 +140,10 @@ module.exports = class com {
 
                 for (let i = 0; i < registerDevices.devices.length; ++i) {
                     if (deviceInfo.deviceId == registerDevices.devices[i].id) {
-                        outRegister.devices.push(registerDevices.devices[i])
+                        outRegister.devices.push({"name" : registerDevices.devices[i].name ,"leds" : registerDevices.devices[i].leds , "pos" : registerDevices.devices[i].pos,"effect" : registerDevices.devices[i].effect, "type" : registerDevices.devices[i].type, "id" : registerDevices.devices[i].id, "cueIndex" : di})
+                        if (rewrite) {
+                            registerDevices.devices[i].cueIndex = di
+                        }
                         pass = true;
                     }
                 }
@@ -142,12 +153,10 @@ module.exports = class com {
 
                     for (let i = 0; i < ledPositions.length; ++i)
                         curent.leds.push({"ledId" : ledPositions[i].ledId, "top" : ledPositions[i].top, "left" : ledPositions[i].left, "color" : {"r" : 255, "g" : 0, "b" : 0}})
-                    
-                    registerDevices.devices.push(curent)
                     outRegister.devices.push(curent)
-                    reWrite = true
+                    if (rewrite)
+                        registerDevices.devices.push(curent)
                 }
-                
             }
         }
 
@@ -161,7 +170,7 @@ module.exports = class com {
             }
         }
 
-        if (reWrite)
+        if (rewrite)
             utils.WriteJSON(path() + "devices.json", registerDevices)
         return outRegister
     }
@@ -180,11 +189,6 @@ module.exports = class com {
         const registerDevices = utils.ReadJSON(path() + "devices.json")
         let find = false;
 
-        // for (let i = 0; i < registerDevices.devices.length; ++i) {
-        //     // if (registerDevices.devices[i].name == name)
-        //     //     return "already exist"
-        // }
-        
         for (let i = 0; i < razerIds.length; ++i) {
             if (name == razerIds[i].device) {
                 if (!this.chroma)
@@ -207,16 +211,16 @@ module.exports = class com {
         let change = false;
         
 
-        for (let i = 0; i < devices.length; ++i) {
-            if (id == devices[i].id) {
+        for (let i = 0; i < devices.devices.length; ++i) {
+            if (id == devices.devices[i].id) {
                 find = true;
-                if (effect != devices[i].effect) {
+                if (effect != devices.devices[i].effect) {
                     change = true
-                    if (devices[i].effect == "sync")
-                        //removefrom syncEffect List
+                    if (devices.devices[i].effect == "sync")
+                        this.syncEffect.removeDevice(devices.devices[i])
                     if (effect == "sync")
-                        //add in syncEffect list
-                    devices[i].effect =  effect;
+                        this.syncEffect.addDevice({"id" : id, "pos" : devices.devices[i].pos, "cueIndex" : devices.devices[i].cueIndex, "leds" : devices.devices[i].leds})
+                    devices.devices[i].effect =  effect;
                 }
             }
         }
@@ -226,11 +230,8 @@ module.exports = class com {
             return "false"
 
         if (!change)
-            return "no chan"
+            return "no change"
         utils.WriteJSON(path() + "devices.json", devices)
         return "true"
-
-
-        
     }
 }

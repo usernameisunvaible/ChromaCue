@@ -11,6 +11,9 @@ const sdk = require("./node/sdk/index")
 
 
 
+// sdk.syncEffect.init()
+
+
 
 sdk.com.init(() => {
     app.use(express.json())
@@ -19,14 +22,11 @@ sdk.com.init(() => {
     app.use("/", delete_route);
     app.use("/", put_route);
     app.use(express.static('static'));
-
+    
+    
     app.listen(8134, () => {
         console.log('Serveur à l écoute')
     })
 })
 
-// Chroma.util.init(() => {
-    
-//     
-// })
 

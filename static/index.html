@@ -7,9 +7,24 @@
     </head>
     <body onload="loadPage()">
         <button class="saveButton" type="button" onclick="save()">save</button>
+        <img class="syncButton"  onclick="openSyncEffectMenu()" src="/assets/sync.png">
         <div id="noPosItem"></div>
         <div id="PosItems"></div>
         
+        <div id="SyncEffectMenu">
+            <button class="closeButton" type="button" onclick="document.getElementById('SyncEffectMenu').style.display = 'none'"></button>
+            <div id="SyncEffectMenuMain">
+                <div id="SyncEffectImg">
+                    <img src="" height="100%">
+                </div>
+            </div>
+            <!-- <div>
+                <div class="syncEffectCheckbox checkbox unchecked">
+                    <div style="background-color: rgba(255, 255, 255, 0.836); opacity: 0; border-radius: 0.3vw; width: 100%; height: 100%;"></div>
+                </div>
+            </div> -->
+        </div>
+
         <div id="ItemInfoMenu" style="display: none;">
             <button class="closeButton" type="button" onclick="document.getElementById('ItemInfoMenu').style.display = 'none'"></button>
             <div id="infoMenuMain">
@@ -18,8 +33,10 @@
                 </div>
 
                 <div id="sync">
-                    <div class="checkbox unchecked">
-                        <img src="/assets/sync.png" style="height: 100%; width: 100%; opacity: 0;">
+                    <div class="syncCheckbox checkbox unchecked">
+                        <div style="background-color: rgba(255, 255, 255, 0.365); opacity: 0; border-radius: 0.3vw;">
+                            <img src="/assets/sync.png" style="height: 100%; width: 100%;">
+                        </div>
                     </div>
                 </div>
 

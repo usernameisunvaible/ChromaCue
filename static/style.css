@@ -60,16 +60,38 @@ body {
     color : white;
 }
 
+
+
+.syncButton {
+    position: fixed;
+    top: 1%;
+    left: 92%;
+    width: 2.4vw;
+    height: 2.4vw;
+    background-color: rgba(173, 173, 173, 0.884);
+    border-radius: 0.6vw;
+    z-index: 10;
+    text-align: center;
+    border: solid;
+    border-width: 0.012vw;
+}
+
+.syncButton:hover {
+    background-color: rgba(230, 230, 230, 0.884);
+    cursor : pointer;
+}
+
 .saveButton {
     position: fixed;
     top: 1%;
-    left: 94%;
-    width: 5%;
-    height: 5%;
+    left: 95%;
+    width: 4vw;
+    height: 2.5vw;
     background-color: rgba(173, 173, 173, 0.884);
-    border-radius: 10%;
-    font-size: 150%;
+    border-radius: 0.6vw;
+    font-size: 1vw;
     z-index: 10;
+    border-width: 0.1vw;
 }
 
 .saveButton:hover {
@@ -78,6 +100,21 @@ body {
 }
 
 #ItemInfoMenu {
+    background-image: url("/assets/infoMenuBack.jpg");
+    background-size: contain;
+    background-attachment: fixed;
+    height: 20%;
+    width: 99%;
+    position: fixed;
+    top : 80%;
+    border-top-left-radius: 1vw;
+    border-top-right-radius: 1vw;
+    border: solid;
+    border-width: 0.1vw;
+    border-color: rgb(161, 161, 161);    
+}
+
+#SyncEfffectMenu {
     background-image: url("/assets/infoMenuBack.jpg");
     background-size: contain;
     background-attachment: fixed;
@@ -101,6 +138,7 @@ body {
     height: 1.3vw;
     background-color: rgba(255, 88, 88, 0.438);
     border-radius: 1vw;
+    border-width: 0.1vw;
 }
 
 .closeButton:hover {
@@ -110,6 +148,11 @@ body {
 
 .closeButton:active {
     background-color: rgba(255, 170, 170, 0.603);
+}
+
+#SyncEffectMenuMain {
+    height: 100%;
+    display: flex;
 }
 
 #infoMenuMain {
@@ -166,7 +209,6 @@ body {
 }
 
 .checkbox {
-    /* background-color: rgba(255, 255, 255, 0.365); */
     padding: 0.06vw;
     border-radius: 0.3vw;
     border-width: 0.1vw;
@@ -179,13 +221,13 @@ body {
     cursor: pointer;
 }
 
-.checked {
+/* .checked {
     background-color: rgba(255, 255, 255, 0.365);
 }
 
 .unchecked {
     background-color: rgba(255, 255, 255, 0);
-}
+} */
 
 
 #sync {

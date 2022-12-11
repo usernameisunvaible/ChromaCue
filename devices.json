@@ -1,5 +1,131 @@
 {
+	"syncEffect": "color change",
 	"devices": [
+		{
+			"name": "RAZER MOUSE",
+			"leds": [
+				{
+					"ledId": 1800,
+					"top": 50,
+					"left": 40,
+					"color": {
+						"r": 0,
+						"g": 255,
+						"b": 179
+					}
+				}
+			],
+			"effect": "sync",
+			"pos": {
+				"x": 518,
+				"y": 346
+			},
+			"type": "razer",
+			"id": "a007dccc97bc274150a4375706c4145f"
+		},
+		{
+			"name": "ST100RGB",
+			"leds": [
+				{
+					"ledId": 191,
+					"top": 20,
+					"left": 60,
+					"color": {
+						"r": 0,
+						"g": 132,
+						"b": 255
+					}
+				},
+				{
+					"ledId": 198,
+					"top": 60,
+					"left": 20,
+					"color": {
+						"r": 0,
+						"g": 132,
+						"b": 255
+					}
+				},
+				{
+					"ledId": 199,
+					"top": 0,
+					"left": 0,
+					"color": {
+						"r": 0,
+						"g": 132,
+						"b": 255
+					}
+				},
+				{
+					"ledId": 196,
+					"top": 100,
+					"left": 60,
+					"color": {
+						"r": 0,
+						"g": 132,
+						"b": 255
+					}
+				},
+				{
+					"ledId": 197,
+					"top": 100,
+					"left": 20,
+					"color": {
+						"r": 0,
+						"g": 132,
+						"b": 255
+					}
+				},
+				{
+					"ledId": 192,
+					"top": 20,
+					"left": 60,
+					"color": {
+						"r": 0,
+						"g": 132,
+						"b": 255
+					}
+				},
+				{
+					"ledId": 194,
+					"top": 60,
+					"left": 100,
+					"color": {
+						"r": 0,
+						"g": 132,
+						"b": 255
+					}
+				},
+				{
+					"ledId": 193,
+					"top": 20,
+					"left": 100,
+					"color": {
+						"r": 0,
+						"g": 132,
+						"b": 255
+					}
+				},
+				{
+					"ledId": 195,
+					"top": 100,
+					"left": 100,
+					"color": {
+						"r": 0,
+						"g": 132,
+						"b": 255
+					}
+				}
+			],
+			"pos": {
+				"x": 595,
+				"y": 335
+			},
+			"effect": "sync",
+			"type": "corsair",
+			"id": "9da420494e6c9509990e48a18f95c316",
+			"cueIndex": 0
+		},
 		{
 			"name": "K55 RGB",
 			"leds": [
@@ -8,19 +134,9 @@
 					"top": 18,
 					"left": 173,
 					"color": {
-						"r": 174,
-						"g": 0,
-						"b": 255
-					}
-				},
-				{
-					"ledId": 501,
-					"top": 18,
-					"left": 74,
-					"color": {
-						"r": 174,
-						"g": 0,
-						"b": 255
+						"r": 9,
+						"g": 105,
+						"b": 2
 					}
 				},
 				{
@@ -28,20 +144,30 @@
 					"top": 18,
 					"left": 5,
 					"color": {
-						"r": 174,
-						"g": 0,
-						"b": 255
+						"r": 9,
+						"g": 105,
+						"b": 2
+					}
+				},
+				{
+					"ledId": 501,
+					"top": 18,
+					"left": 74,
+					"color": {
+						"r": 9,
+						"g": 105,
+						"b": 2
 					}
 				}
 			],
 			"pos": {
-				"x": 546,
-				"y": 309
+				"x": 427,
+				"y": 351
 			},
-			"effect": "static",
+			"effect": "sync",
 			"type": "corsair",
 			"id": "2781da5a85840d024d2c7e7c70b1a0b7",
-			"cueIndex": 0
+			"cueIndex": 2
 		},
 		{
 			"name": "VOID PRO Wireless",
@@ -68,262 +194,13 @@
 				}
 			],
 			"pos": {
-				"x": 312,
-				"y": 552
+				"x": 426,
+				"y": 526
 			},
-			"effect": "static",
+			"effect": "sync",
 			"type": "corsair",
 			"id": "32249dfe024591478ce4fdcb7840d038",
 			"cueIndex": 1
-		},
-		{
-			"name": "VENGEANCE RGB RS",
-			"leds": [
-				{
-					"ledId": 600,
-					"top": 4,
-					"left": 108,
-					"color": {
-						"r": 255,
-						"g": 247,
-						"b": 0
-					}
-				},
-				{
-					"ledId": 601,
-					"top": 29,
-					"left": 108,
-					"color": {
-						"r": 255,
-						"g": 247,
-						"b": 0
-					}
-				},
-				{
-					"ledId": 602,
-					"top": 55,
-					"left": 108,
-					"color": {
-						"r": 255,
-						"g": 247,
-						"b": 0
-					}
-				},
-				{
-					"ledId": 603,
-					"top": 80,
-					"left": 108,
-					"color": {
-						"r": 255,
-						"g": 247,
-						"b": 0
-					}
-				},
-				{
-					"ledId": 604,
-					"top": 106,
-					"left": 108,
-					"color": {
-						"r": 255,
-						"g": 247,
-						"b": 0
-					}
-				},
-				{
-					"ledId": 605,
-					"top": 132,
-					"left": 108,
-					"color": {
-						"r": 255,
-						"g": 247,
-						"b": 0
-					}
-				}
-			],
-			"pos": {
-				"x": -1,
-				"y": -1
-			},
-			"effect": "static",
-			"type": "corsair",
-			"id": "3087ccb7b877e1d11a3d30af0133093a",
-			"cueIndex": 2
-		},
-		{
-			"name": "VENGEANCE RGB RS",
-			"leds": [
-				{
-					"ledId": 600,
-					"top": 4,
-					"left": 124,
-					"color": {
-						"r": 0,
-						"g": 17,
-						"b": 255
-					}
-				},
-				{
-					"ledId": 601,
-					"top": 29,
-					"left": 124,
-					"color": {
-						"r": 0,
-						"g": 17,
-						"b": 255
-					}
-				},
-				{
-					"ledId": 602,
-					"top": 55,
-					"left": 124,
-					"color": {
-						"r": 0,
-						"g": 17,
-						"b": 255
-					}
-				},
-				{
-					"ledId": 603,
-					"top": 80,
-					"left": 124,
-					"color": {
-						"r": 0,
-						"g": 17,
-						"b": 255
-					}
-				},
-				{
-					"ledId": 604,
-					"top": 106,
-					"left": 124,
-					"color": {
-						"r": 0,
-						"g": 17,
-						"b": 255
-					}
-				},
-				{
-					"ledId": 605,
-					"top": 132,
-					"left": 124,
-					"color": {
-						"r": 0,
-						"g": 17,
-						"b": 255
-					}
-				}
-			],
-			"pos": {
-				"x": 669,
-				"y": 615
-			},
-			"effect": "static",
-			"type": "corsair",
-			"id": "4440346e65709488c84ea5c7005b68b1",
-			"cueIndex": 3
-		},
-		{
-			"name": "ST100RGB",
-			"leds": [
-				{
-					"ledId": 197,
-					"top": 100,
-					"left": 20,
-					"color": {
-						"r": 0,
-						"g": 255,
-						"b": 64
-					}
-				},
-				{
-					"ledId": 196,
-					"top": 100,
-					"left": 60,
-					"color": {
-						"r": 0,
-						"g": 255,
-						"b": 64
-					}
-				},
-				{
-					"ledId": 195,
-					"top": 100,
-					"left": 100,
-					"color": {
-						"r": 0,
-						"g": 255,
-						"b": 64
-					}
-				},
-				{
-					"ledId": 194,
-					"top": 60,
-					"left": 100,
-					"color": {
-						"r": 0,
-						"g": 255,
-						"b": 64
-					}
-				},
-				{
-					"ledId": 193,
-					"top": 20,
-					"left": 100,
-					"color": {
-						"r": 0,
-						"g": 255,
-						"b": 64
-					}
-				},
-				{
-					"ledId": 192,
-					"top": 20,
-					"left": 60,
-					"color": {
-						"r": 0,
-						"g": 255,
-						"b": 64
-					}
-				},
-				{
-					"ledId": 191,
-					"top": 20,
-					"left": 60,
-					"color": {
-						"r": 0,
-						"g": 255,
-						"b": 64
-					}
-				},
-				{
-					"ledId": 199,
-					"top": 0,
-					"left": 0,
-					"color": {
-						"r": 0,
-						"g": 255,
-						"b": 64
-					}
-				},
-				{
-					"ledId": 198,
-					"top": 60,
-					"left": 20,
-					"color": {
-						"r": 0,
-						"g": 255,
-						"b": 64
-					}
-				}
-			],
-			"pos": {
-				"x": -1,
-				"y": -1
-			},
-			"effect": "static",
-			"type": "corsair",
-			"id": "9da420494e6c9509990e48a18f95c316",
-			"cueIndex": 4
 		},
 		{
 			"name": "MM700 RGB",
@@ -333,19 +210,9 @@
 					"top": 114,
 					"left": 0,
 					"color": {
-						"r": 153,
-						"g": 255,
-						"b": 0
-					}
-				},
-				{
-					"ledId": 168,
-					"top": 57,
-					"left": 125,
-					"color": {
-						"r": 153,
-						"g": 255,
-						"b": 0
+						"r": 254,
+						"g": 77,
+						"b": 77
 					}
 				},
 				{
@@ -353,42 +220,176 @@
 					"top": 0,
 					"left": 250,
 					"color": {
-						"r": 153,
-						"g": 255,
-						"b": 0
+						"r": 254,
+						"g": 77,
+						"b": 77
+					}
+				},
+				{
+					"ledId": 168,
+					"top": 57,
+					"left": 125,
+					"color": {
+						"r": 254,
+						"g": 77,
+						"b": 77
 					}
 				}
 			],
 			"pos": {
-				"x": -1,
-				"y": -1
+				"x": 432,
+				"y": 279
 			},
-			"effect": "static",
+			"effect": "sync",
 			"type": "corsair",
 			"id": "63f9fdcaa000f804493992333d2a7fba",
-			"cueIndex": 5
+			"cueIndex": 3
 		},
 		{
-			"name": "RAZER MOUSE",
+			"name": "VENGEANCE RGB RS",
 			"leds": [
 				{
-					"ledId": 1800,
-					"top": 50,
-					"left": 40,
+					"ledId": 600,
+					"top": 4,
+					"left": 108,
 					"color": {
-						"r": 245,
+						"r": 0,
 						"g": 0,
+						"b": 153
+					}
+				},
+				{
+					"ledId": 601,
+					"top": 29,
+					"left": 108,
+					"color": {
+						"r": 0,
+						"g": 0,
+						"b": 153
+					}
+				},
+				{
+					"ledId": 602,
+					"top": 55,
+					"left": 108,
+					"color": {
+						"r": 0,
+						"g": 0,
+						"b": 153
+					}
+				},
+				{
+					"ledId": 603,
+					"top": 80,
+					"left": 108,
+					"color": {
+						"r": 0,
+						"g": 0,
+						"b": 153
+					}
+				},
+				{
+					"ledId": 604,
+					"top": 106,
+					"left": 108,
+					"color": {
+						"r": 0,
+						"g": 0,
+						"b": 153
+					}
+				},
+				{
+					"ledId": 605,
+					"top": 132,
+					"left": 108,
+					"color": {
+						"r": 0,
+						"g": 0,
+						"b": 153
+					}
+				}
+			],
+			"pos": {
+				"x": 737,
+				"y": 210
+			},
+			"effect": "sync",
+			"type": "corsair",
+			"id": "3087ccb7b877e1d11a3d30af0133093a",
+			"cueIndex": 4
+		},
+		{
+			"name": "VENGEANCE RGB RS",
+			"leds": [
+				{
+					"ledId": 600,
+					"top": 4,
+					"left": 124,
+					"color": {
+						"r": 253,
+						"g": 131,
+						"b": 0
+					}
+				},
+				{
+					"ledId": 601,
+					"top": 29,
+					"left": 124,
+					"color": {
+						"r": 253,
+						"g": 131,
+						"b": 0
+					}
+				},
+				{
+					"ledId": 602,
+					"top": 55,
+					"left": 124,
+					"color": {
+						"r": 253,
+						"g": 131,
+						"b": 0
+					}
+				},
+				{
+					"ledId": 603,
+					"top": 80,
+					"left": 124,
+					"color": {
+						"r": 253,
+						"g": 131,
+						"b": 0
+					}
+				},
+				{
+					"ledId": 604,
+					"top": 106,
+					"left": 124,
+					"color": {
+						"r": 253,
+						"g": 131,
+						"b": 0
+					}
+				},
+				{
+					"ledId": 605,
+					"top": 132,
+					"left": 124,
+					"color": {
+						"r": 253,
+						"g": 131,
 						"b": 0
 					}
 				}
 			],
-			"effect": "static",
 			"pos": {
-				"x": -1,
-				"y": -1
+				"x": 739,
+				"y": 212
 			},
-			"type": "razer",
-			"id": "a007dccc97bc274150a4375706c4145f"
+			"effect": "sync",
+			"type": "corsair",
+			"id": "4440346e65709488c84ea5c7005b68b1",
+			"cueIndex": 5
 		}
 	]
 }

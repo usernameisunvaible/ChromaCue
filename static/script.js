@@ -137,6 +137,13 @@ function dbClick(e)
     let device = findDeviceById(this.children[1].getAttribute("appid"))
     let globalColor = colorComp(device)
 
+    if (device.effect == "sync") {
+        let ch = document.getElementById("sync").children[0]
+        ch.setAttribute("value", "1")
+        ch.children[0].style.opacity = 1
+        ch.classList.add("checked")
+        ch.classList.remove("unchecked")
+    }
     document.getElementById("allMyLeds").textContent = ""
     document.getElementById("ItemInfoMenu").setAttribute("name", device.name)
     document.getElementById("ItemInfoMenu").setAttribute("appid", device.id)
@@ -156,31 +163,70 @@ function dbClick(e)
     document.getElementById("ItemInfoMenu").style.display = "block"
 }
 
-function toggleCheckbox(ch)
+
+
+function toggleCheckBox(box, checkCallback, uncheckCallback)
 {
-    if(ch.getAttribute("value") == "0" ||ch.getAttribute("value") == null) {
-        ch.setAttribute("value", "1")
-        ch.children[0].style.opacity = 1
-        ch.classList.add("checked")
-        ch.classList.remove("unchecked")
+    if(box.getAttribute("value") == "0" ||box.getAttribute("value") == null) {
+        box.setAttribute("value", "1")
+        box.children[0].style.opacity = 1
+        box.classList.add("checked")
+        box.classList.remove("unchecked")
+        if (checkCallback)
+            checkCallback(box)
     } else {
-        ch.setAttribute("value", "0")
-        ch.classList.add("unchecked")
-        ch.classList.remove("checked")
-        ch.children[0].style.opacity = 0
-    }  
+        box.setAttribute("value", "0")
+        box.classList.add("unchecked")
+        box.classList.remove("checked")
+        box.children[0].style.opacity = 0
+        if (uncheckCallback)
+            uncheckCallback(box)
+    } 
+
 }
 
-function checkTheBox(e)
+function checkThesyncBox(e)
 {
-    toggleCheckbox(this)
+    toggleCheckBox(this,(box) => {
+        $.ajax({
+            type: "PUT",
+            url: "/effect",
+            data: JSON.stringify ({"id" : box.parentNode.parentNode.parentNode.getAttribute("appid"), "effect" : "sync"}),
+            contentType: "application/json; charset=utf-8",
+            dataType :"json",
+            success: function(result) {
+                console.log(result);
+            },
+          });
+    }, (box) => {
+        $.ajax({
+            type: "PUT",
+            url: "/effect",
+            data: JSON.stringify ({"id" : box.parentNode.parentNode.parentNode.getAttribute("appid"), "effect" : "static"}),
+            contentType: "application/json; charset=utf-8",
+            dataType :"json",
+            success: function(result) {
+                console.log(result);
+            },
+          });
+    })
+}
+
+function checkSyncEffect(e)
+{
+    toggleCheckBox(this,() => {}, () => {})
 }
 
 function loadPage()
 {
-    let boxs = document.querySelectorAll('.checkbox');
+    let boxs = document.querySelectorAll('.syncCheckbox');
     boxs.forEach(function(boxs) {
-        boxs.addEventListener("click", checkTheBox, false)
+        boxs.addEventListener("click", checkThesyncBox, false)
+    })
+
+    boxs = document.querySelectorAll('.syncEffectCheckbox');
+    boxs.forEach(function(boxs) {
+        boxs.addEventListener("click", checkSyncEffect, false)
     })
 
     $.ajax({url: "/devices", success: function(result){
@@ -203,7 +249,6 @@ function loadPage()
             item.addEventListener("mouseup", mouseup, false)
             item.addEventListener("dblclick", dbClick, false)
         })
-        items = document.querySelectorAll('.box');
     }})
     
     
@@ -234,6 +279,11 @@ function save()
             console.log(result);
         },
       });
+}
+
+function openSyncEffectMenu()
+{
+    document.getElementById('SyncEffectMenu').style.display = 'block'
 }
 
 function findDeviceById(id)
